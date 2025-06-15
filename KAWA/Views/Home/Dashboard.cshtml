@@ -1,4 +1,5 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Layout1.cshtml"; // Ustawia ścieżkę do pliku layoutu
     ViewBag.Title = "Panel Zarządzania"; // Zgodne z tytułem ustawionym w kontrolerze
 }
 
@@ -8,16 +9,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Sekcje aplikacji</h2>
-        <ul>
-            <li>@Html.ActionLink("Kraje", "Index", "Countries")</li>
-            <li>@Html.ActionLink("Miasta", "Index", "Cities")</li>
-            <li>@Html.ActionLink("Ziarna Kawy", "Index", "CoffeeBeans")</li>
-            <li>@Html.ActionLink("Palarnie", "Index", "Roasters")</li>
-            <li>@Html.ActionLink("Kawy (Produkty)", "Index", "Coffees")</li>
-        </ul>
-    </div>
+   
     <div class="col-md-4">
         <h2>Informacje</h2>
         <p>Ta aplikacja została stworzona w ramach projektu zaliczeniowego z przedmiotu Backend.</p>

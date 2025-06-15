@@ -18,21 +18,15 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    @* Link do strony z logo *@
-                    <li>@Html.ActionLink("Start", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    @* Link do panelu zarządzania (Twoja główna strona z linkami CRUD) *@
-                    <li>@Html.ActionLink("Panel Zarządzania", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                 
+                   
 
-                    @* Linki do sekcji CRUD *@
                     <li>@Html.ActionLink("Kraje", "Index", "Countries", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Miasta", "Index", "Cities", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Ziarna Kawy", "Index", "CoffeeBeans", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Palarnie", "Index", "Roasters", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Kawy (Produkty)", "Index", "Coffees", new { area = "" }, new { @class = "nav-link" })</li>
 
-                    @* Opcjonalnie: możesz usunąć te, jeśli nie są potrzebne do projektu na 3.0 *@
-                    @* <li>@Html.ActionLink("Informacje", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li> *@
-                    @* <li>@Html.ActionLink("Kontakt", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li> *@
                 </ul>
             </div>
         </div>
