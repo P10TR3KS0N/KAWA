@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - BallerinaCappucina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="https://kit.fontawesome.com/1edc22dcad.js" crossorigin="anonymous"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            background-color: #FFFCF5;
+            font-family: 'Lexend Deca', sans-serif;
+            color: #000000;
+        }
+
+        header {
+            position: relative;
+            height: 100px;
+            background-color: #FFFCF5;
+            border-bottom: 2px solid #FAB7CF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            color: #FAB7CF;
+        }
+
+            .logo-title img {
+                height: 60px;
+                margin-right: 15px;
+            }
+
+            .logo-title h1 {
+                font-family: 'Edu NSW ACT Cursive', cursive;
+                font-size: 2.5rem;
+                margin: 0;
+            }
+
+        .btn-cart {
+            position: absolute;
+            right: 1rem;
+            background-color: #735438;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 14px;
+            color: #FFFCF5;
+            cursor: pointer;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-cart:hover {
+                background-color: #5e422b;
+            }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: row;
+            height: calc(100vh - 100px);
+        }
+
+        .sidebar {
+            background-color: #A67C58;
+            padding-top: 1rem;
+            width: 200px;
+            overflow-y: auto;
+        }
+
+            .sidebar .list-group-item {
+                background-color: transparent;
+                color: #FFFCF5;
+                border: none;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+                .sidebar .list-group-item:hover {
+                    background-color: #FAB7CF;
+                    color: #000;
+                    border-radius: 10px;
+                    padding-left: 1.5rem;
+                    transform: translateX(5px);
+                }
+
+            .sidebar .active {
+                background-color: #FAB7CF;
+                color: #000000;
+                font-weight: bold;
+                border-radius: 10px;
+            }
+
+        .content-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #FFFCF5;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+        }
+
+        .card-title {
+            color: #735438;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #FAB7CF;
+            border: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+            .btn-primary:hover {
+                background-color: #f89fc6;
+                color: #000;
+            }
+
+        .btn-add {
+            background-color: #735438 !important;
+            color: #FFFCF5 !important;
+            border: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+        }
+
+            .btn-add:hover {
+                background-color: #5e422b !important;
+                color: #FFFCF5 !important;
+            }
+
+        @@media (max-width: 768px) {
+            .main-wrapper {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+                .sidebar .list-group {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                }
+
+            .logo-title h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo-title img {
+                height: 40px;
+                margin-right: 10px;
+            }
+
+            .content-area {
+                padding: 10px;
+            }
+
+            .btn-cart {
+                padding: 8px 12px;
+                font-size: 1.2rem;
+            }
+
+            .price {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <img src="~/images/BallerinaLogo.png" alt="Logo Ballerina Cappucina" />
+            <h1>BallerinaCappucina Coffeehouse</h1>
+        </div>
+
+    </header>
+
+    <div class="main-wrapper">
+        <nav class="sidebar">
+            <div class="list-group list-group-flush">
+                @Html.ActionLink("Kraje", "Index", "Countries", null, new { @class = "list-group-item list-group-item-action" + (ViewContext.RouteData.Values["Controller"].ToString() == "Countries" ? " active" : "") })
+                @Html.ActionLink("Miasta", "Index", "Cities", null, new { @class = "list-group-item list-group-item-action" + (ViewContext.RouteData.Values["Controller"].ToString() == "Cities" ? " active" : "") })
+                @Html.ActionLink("Ziarna Kawy", "Index", "CoffeeBeans", null, new { @class = "list-group-item list-group-item-action" + (ViewContext.RouteData.Values["Controller"].ToString() == "CoffeeBeans" ? " active" : "") })
+                @Html.ActionLink("Palarnie", "Index", "Roasters", null, new { @class = "list-group-item list-group-item-action" + (ViewContext.RouteData.Values["Controller"].ToString() == "Roasters" ? " active" : "") })
+                @Html.ActionLink("Kawy (Produkty)", "Index", "Coffees", null, new { @class = "list-group-item list-group-item-action" + (ViewContext.RouteData.Values["Controller"].ToString() == "Coffees" ? " active" : "") })
+            </div>
+        </nav>
+
+        <div class="content-area">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

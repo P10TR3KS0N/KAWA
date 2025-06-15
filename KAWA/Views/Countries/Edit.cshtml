@@ -1,6 +1,7 @@
 ﻿@model CoffeeAppMvc5.Models.Country
 
 @{
+    Layout = "~/Views/Shared/_IndexLayout.cshtml";
     ViewBag.Title = "Edit";
 }
 
@@ -10,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Country</h4>
         <hr />
