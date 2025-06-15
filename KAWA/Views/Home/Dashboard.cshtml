@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Panel Zarządzania"; // Zgodne z tytułem ustawionym w kontrolerze
+}
+
+<div class="jumbotron">
+    <h1>Witaj w Panelu Zarządzania CoffeeApp!</h1>
+    <p class="lead">Zarządzaj swoimi ulubionymi kawami, ziarnami, palarniami i ich pochodzeniem.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Sekcje aplikacji</h2>
+        <ul>
+            <li>@Html.ActionLink("Kraje", "Index", "Countries")</li>
+            <li>@Html.ActionLink("Miasta", "Index", "Cities")</li>
+            <li>@Html.ActionLink("Ziarna Kawy", "Index", "CoffeeBeans")</li>
+            <li>@Html.ActionLink("Palarnie", "Index", "Roasters")</li>
+            <li>@Html.ActionLink("Kawy (Produkty)", "Index", "Coffees")</li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h2>Informacje</h2>
+        <p>Ta aplikacja została stworzona w ramach projektu zaliczeniowego z przedmiotu Backend.</p>
+        <p>Umożliwia dodawanie, edytowanie, przeglądanie i usuwanie danych dotyczących kawy.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Status</h2>
+        <p>Projekt w fazie rozwoju.</p>
+        <p>Wszystkie podstawowe operacje CRUD są dostępne.</p>
+    </div>
+</div>

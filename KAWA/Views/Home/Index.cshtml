@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Witaj w CoffeeApp";
+    Layout = null; // Ustawiamy Layout na null, aby ta strona nie używała głównego szablonu (navbar, footer itp.)
+                   // Będzie to prosta strona startowa z samym logo.
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Ballerina Cappuccina Coffeehouse</title>
+    @Styles.Render("~/Content/css") @* Załadowanie domyślnych styli Bootstrapa *@
+    @Scripts.Render("~/bundles/modernizr") @* Nowoczesne skrypty, jeśli potrzebne *@
+
+    <style>
+        body {
+            background-color: #f8f8f8; /* Jasne tło */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Zajmij całą wysokość widoku */
+            margin: 0;
+        }
+
+        .logo-container {
+            text-align: center;
+            cursor: pointer; /* Kursor wskazujący, że to klikalne */
+        }
+
+            .logo-container img {
+                max-width: 80%; /* Maksymalna szerokość obrazka */
+                height: auto; /* Zachowanie proporcji */
+                display: block; /* Usuwa zbędne marginesy pod obrazkiem */
+                margin: 0 auto; /* Wyśrodkowanie obrazka */
+                transition: transform 0.3s ease; /* Płynne przejście przy najechaniu */
+            }
+
+                .logo-container img:hover {
+                    transform: scale(1.05); /* Lekkie powiększenie przy najechaniu */
+                }
+
+        .click-me-text {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        @* Link do nowej akcji Dashboard w HomeController *@
+        <a href="@Url.Action("Dashboard", "Home")">
+            <img src="@Url.Content("~/Content/images/ballcapp.png")" alt="Ballerina Cappuccina Coffeehouse Logo" />
+        </a>
+        <p class="click-me-text">Kliknij logo, aby przejść dalej!</p>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

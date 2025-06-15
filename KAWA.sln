@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KAWA", "KAWA\KAWA.csproj", "{8FE3D3E9-09B3-4C7F-879B-E8F4959ABF4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KAWA.Tests", "KAWA.Tests\KAWA.Tests.csproj", "{B7B9B5F2-1739-44B6-90A1-ADF105540E6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FE3D3E9-09B3-4C7F-879B-E8F4959ABF4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE3D3E9-09B3-4C7F-879B-E8F4959ABF4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE3D3E9-09B3-4C7F-879B-E8F4959ABF4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE3D3E9-09B3-4C7F-879B-E8F4959ABF4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7B9B5F2-1739-44B6-90A1-ADF105540E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7B9B5F2-1739-44B6-90A1-ADF105540E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7B9B5F2-1739-44B6-90A1-ADF105540E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7B9B5F2-1739-44B6-90A1-ADF105540E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

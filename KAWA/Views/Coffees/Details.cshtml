@@ -1,0 +1,58 @@
+﻿@model CoffeeAppMvc5.Models.Coffee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Coffee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bean.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bean.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Roaster.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Roaster.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoastLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoastLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
