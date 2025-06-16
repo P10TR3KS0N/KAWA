@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dokumentacja techniczna CoffeeAppMvc5</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        h1, h2, h3 { color: #2c3e50; }
+        .config-box { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .code-block { background: #f4f4f4; padding: 10px; border-left: 3px solid #3498db; overflow-x: auto; }
+        .tech-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .tech-table th { background: #2c3e50; color: white; text-align: left; padding: 8px; }
+        .tech-table td { padding: 8px; border: 1px solid #ddd; }
+        .dependency { background: #e8f4f8; padding: 8px; margin: 5px 0; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>Dokumentacja techniczna CoffeeAppMvc5</h1>
+    <p>Ostatnia aktualizacja: <span id="update-date">10 listopada 2023</span></p>
+
+    <div class="section">
+        <h2>Konfiguracja projektu</h2>
+        
+        <div class="config-box">
+            <h3>Podstawowe informacje</h3>
+            <ul>
+                <li><strong>Typ projektu:</strong> ASP.NET MVC 5</li>
+                <li><strong>Platforma docelowa:</strong> .NET Framework 4.7.2</li>
+                <li><strong>Kompilator:</strong> Microsoft.CodeDom.Providers.DotNetCompilerPlatform</li>
+                <li><strong>Serwer deweloperski:</strong> IIS Express (port 44391)</li>
+            </ul>
+        </div>
+
+        <div class="config-box">
+            <h3>Plik projektu (KAWA.csproj)</h3>
+            <p>Kluczowe elementy konfiguracji:</p>
+            <ul>
+                <li>Referencje do Entity Framework 6.4.4</li>
+                <li>Integracja z ASP.NET MVC 5.2.9</li>
+                <li>Wsparcie dla Web API</li>
+                <li>Kompilacja widoków wyłączona (MvcBuildViews=false)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Konfiguracja routingu</h2>
+        
+        <div class="config-box">
+            <h3>RouteConfig.cs</h3>
+            <div class="code-block">
+<pre>public static void RegisterRoutes(RouteCollection routes)
+{
+    routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+    routes.MapRoute(
+        name: "Default",
+        url: "{controller}/{action}/{id}",
+        defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+    );
+}</pre>
+            </div>
+            <p>Konfiguracja routingu definiuje:</p>
+            <ul>
+                <li>Ignorowanie ścieżek do plików .axd (handlerów HTTP)</li>
+                <li>Domyślną trasę: <code>{controller}/{action}/{id}</code></li>
+                <li>Domyślny kontroler: Home</li>
+                <li>Domyślną akcję: Index</li>
+                <li>Parametr id jako opcjonalny</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Konfiguracja bundlingu i minifikacji</h2>
+        
+        <div class="config-box">
+            <h3>BundleConfig.cs</h3>
+            <div class="code-block">
+<pre>public static void RegisterBundles(BundleCollection bundles)
+{
+    bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jquery-{version}.js"));
+
+    bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                "~/Scripts/jquery.validate*"));
+
+    bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                "~/Scripts/modernizr-*"));
+
+    bundles.Add(new Bundle("~/bundles/bootstrap").Include(
+              "~/Scripts/bootstrap.js"));
+
+    bundles.Add(new StyleBundle("~/Content/css").Include(
+              "~/Content/bootstrap.css",
+              "~/Content/site.css"));
+}</pre>
+            </div>
+            <p>Zdefiniowane bunddle:</p>
+            <table class="tech-table">
+                <tr><th>Bundle</th><th>Zawartość</th></tr>
+                <tr><td>~/bundles/jquery</td><td>jQuery (wersja 3.7.0)</td></tr>
+                <tr><td>~/bundles/jqueryval</td><td>Walidacja jQuery</td></tr>
+                <tr><td>~/bundles/modernizr</td><td>Modernizr (wersja 2.8.3)</td></tr>
+                <tr><td>~/bundles/bootstrap</td><td>Bootstrap JS</td></tr>
+                <tr><td>~/Content/css</td><td>Bootstrap CSS + site.css</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Konfiguracja filtrów</h2>
+        
+        <div class="config-box">
+            <h3>FilterConfig.cs</h3>
+            <div class="code-block">
+<pre>public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+{
+    filters.Add(new HandleErrorAttribute());
+}</pre>
+            </div>
+            <p>Globalne filtry:</p>
+            <ul>
+                <li><code>HandleErrorAttribute</code> - przechwytuje i obsługuje nieprzechwycone wyjątki</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Zależności projektu (NuGet)</h2>
+        
+        <table class="tech-table">
+            <tr><th>Pakiet</th><th>Wersja</th><th>Przeznaczenie</th></tr>
+            <tr><td>EntityFramework</td><td>6.4.4</td><td>ORM do pracy z bazą danych</td></tr>
+            <tr><td>Microsoft.AspNet.Mvc</td><td>5.2.9</td><td>ASP.NET MVC 5</td></tr>
+            <tr><td>Microsoft.AspNet.Razor</td><td>3.2.9</td><td>Silnik Razor</td></tr>
+            <tr><td>Microsoft.AspNet.Web.Optimization</td><td>1.1.3</td><td>Bundling i minifikacja</td></tr>
+            <tr><td>Microsoft.AspNet.WebPages</td><td>3.2.9</td><td>Web Pages</td></tr>
+            <tr><td>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</td><td>2.0.1</td><td>Kompilator C#</td></tr>
+            <tr><td>Microsoft.Web.Infrastructure</td><td>2.0.0</td><td>Infrastruktura web</td></tr>
+            <tr><td>Newtonsoft.Json</td><td>13.0.3</td><td>Serializacja JSON</td></tr>
+            <tr><td>WebGrease</td><td>1.6.0</td><td>Narzędzia do optymalizacji</td></tr>
+            <tr><td>Bootstrap</td><td>5.3.0</td><td>Framework CSS/JS</td></tr>
+            <tr><td>jQuery</td><td>3.7.0</td><td>Biblioteka JavaScript</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Struktura projektu</h2>
+        
+        <div class="config-box">
+            <h3>Główne katalogi</h3>
+            <ul>
+                <li><strong>App_Start:</strong> Konfiguracja routingu, bundlingu i filtrów</li>
+                <li><strong>Controllers:</strong> Kontrolery MVC</li>
+                <li><strong>Models:</strong> Modele danych i kontekst EF</li>
+                <li><strong>Views:</strong> Widoki Razor</li>
+                <li><strong>Content:</strong> Pliki CSS i obrazy</li>
+                <li><strong>Scripts:</strong> Pliki JavaScript</li>
+                <li><strong>Migrations:</strong> Migracje Entity Framework</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Konfiguracja środowiska</h2>
+        
+        <div class="config-box">
+            <h3>Wymagania systemowe</h3>
+            <ul>
+                <li>Visual Studio 2019 lub nowszy</li>
+                <li>.NET Framework 4.7.2 Developer Pack</li>
+                <li>SQL Server (lokalny lub zdalny)</li>
+                <li>IIS Express (do debugowania)</li>
+            </ul>
+            
+            <h3>Konfiguracja bazy danych</h3>
+            <p>Projekt używa Entity Framework Code First z migracjami. Connection string konfigurowany jest w pliku Web.config:</p>
+            <div class="code-block">
+<pre>&lt;connectionStrings&gt;
+    &lt;add name="DefaultConnection" 
+         connectionString="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=CoffeeAppDb;Integrated Security=SSPI;" 
+         providerName="System.Data.SqlClient" /&gt;
+&lt;/connectionStrings&gt;</pre>
+            </div>
+        </div>
+    </div>
+
+    <h1>Dokumentacja modeli danych CoffeeAppMvc5</h1>
+    <p>Ostatnia aktualizacja: <span id="update-date">10 listopada 2023</span></p>
+
+    <div class="section">
+        <h2>Diagram relacji encji</h2>
+        <div class="diagram">
+            <pre>
++-------------+       +-------------+       +-------------+
+|   Country   |1    *|    City     |1    *|   Roaster   |
++-------------+       +-------------+       +-------------+
+      |1                                           |1
+      |*                                           |*
++-------------+                              +-------------+
+| CoffeeBean  |                              |   Coffee    |
++-------------+                              +-------------+
+            \____________________________________/ 1
+                                              *</pre>
+            <p>Klucz do diagramu:</p>
+            <ul>
+                <li>1 - relacja jeden (jeden kraj ma wiele miast)</li>
+                <li>* - relacja wiele (wiele kaw może pochodzić z jednej palarni)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>ApplicationDbContext</h2>
+        <div class="model-box">
+            <h3>Połączenie z bazą danych</h3>
+            <p><strong>Connection String:</strong> "DefaultConnection"</p>
+            
+            <h3>Zestawy danych (DbSet)</h3>
+            <ul>
+                <li><strong>Countries:</strong> DbSet&lt;Country&gt;</li>
+                <li><strong>Cities:</strong> DbSet&lt;City&gt;</li>
+                <li><strong>CoffeeBeans:</strong> DbSet&lt;CoffeeBean&gt;</li>
+                <li><strong>Roasters:</strong> DbSet&lt;Roaster&gt;</li>
+                <li><strong>Coffees:</strong> DbSet&lt;Coffee&gt;</li>
+            </ul>
+            
+            <h3>Konfiguracja relacji w OnModelCreating</h3>
+            <table>
+                <tr><th>Relacja</th><th>Typ</th><th>Kaskadowe usuwanie</th></tr>
+                <tr><td>Country → Cities</td><td>1-do-wielu</td><td>Tak</td></tr>
+                <tr><td>Country → CoffeeBeans</td><td>1-do-wielu</td><td>Tak</td></tr>
+                <tr><td>City → Roasters</td><td>1-do-wielu</td><td>Tak</td></tr>
+                <tr><td>CoffeeBean → Coffees</td><td>1-do-wielu</td><td>Nie</td></tr>
+                <tr><td>Roaster → Coffees</td><td>1-do-wielu</td><td>Nie</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Szczegóły modeli</h2>
+
+        <div class="model-box">
+            <h3>Country (Kraj)</h3>
+            <div class="property">
+                <span class="prop-name">Id</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[Key]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">Name</span>: <span class="prop-type">string</span>
+                <div class="prop-attr">[Required], [StringLength(100)], [Display(Name = "Nazwa Kraju")]</div>
+            </div>
+            <div class="relation">
+                <strong>Relacje:</strong>
+                <ul>
+                    <li><strong>Cities</strong>: ICollection&lt;City&gt; (1-do-wielu)</li>
+                    <li><strong>CoffeeBeans</strong>: ICollection&lt;CoffeeBean&gt; (1-do-wielu)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="model-box">
+            <h3>City (Miasto)</h3>
+            <div class="property">
+                <span class="prop-name">Id</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[Key]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">Name</span>: <span class="prop-type">string</span>
+                <div class="prop-attr">[Required], [StringLength(100)], [Display(Name = "Nazwa Miasta")]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">CountryId</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[ForeignKey("Country")]</div>
+            </div>
+            <div class="relation">
+                <strong>Relacje:</strong>
+                <ul>
+                    <li><strong>Country</strong>: Country (wielu-do-jednego)</li>
+                    <li><strong>Roasters</strong>: ICollection&lt;Roaster&gt; (1-do-wielu)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="model-box">
+            <h3>CoffeeBean (Ziarno kawy)</h3>
+            <div class="property">
+                <span class="prop-name">Id</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[Key]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">Name</span>: <span class="prop-type">string</span>
+                <div class="prop-attr">[Required], [StringLength(100)], [Display(Name = "Nazwa Ziarna")]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">OriginCountryId</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[ForeignKey("OriginCountry")]</div>
+            </div>
+            <div class="relation">
+                <strong>Relacje:</strong>
+                <ul>
+                    <li><strong>OriginCountry</strong>: Country (wielu-do-jednego)</li>
+                    <li><strong>Coffees</strong>: ICollection&lt;Coffee&gt; (1-do-wielu)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="model-box">
+            <h3>Roaster (Palarnia)</h3>
+            <div class="property">
+                <span class="prop-name">Id</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[Key]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">Name</span>: <span class="prop-type">string</span>
+                <div class="prop-attr">[Required], [StringLength(150)], [Display(Name = "Nazwa Palarni")]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">CityId</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[ForeignKey("City")]</div>
+            </div>
+            <div class="relation">
+                <strong>Relacje:</strong>
+                <ul>
+                    <li><strong>City</strong>: City (wielu-do-jednego)</li>
+                    <li><strong>Coffees</strong>: ICollection&lt;Coffee&gt; (1-do-wielu)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="model-box">
+            <h3>Coffee (Kawa)</h3>
+            <div class="property">
+                <span class="prop-name">Id</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[Key]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">Name</span>: <span class="prop-type">string</span>
+                <div class="prop-attr">[Required], [StringLength(200)], [Display(Name = "Nazwa Kawy")]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">RoastLevel</span>: <span class="prop-type">string</span>
+                <div class="prop-attr">[Required], [StringLength(50)]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">Price</span>: <span class="prop-type">decimal</span>
+                <div class="prop-attr">[Required], [Range(0.01, 1000.00)], [DataType(DataType.Currency)]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">BeanId</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[ForeignKey("Bean")]</div>
+            </div>
+            <div class="property">
+                <span class="prop-name">RoasterId</span>: <span class="prop-type">int</span>
+                <div class="prop-attr">[ForeignKey("Roaster")]</div>
+            </div>
+            <div class="relation">
+                <strong>Relacje:</strong>
+                <ul>
+                    <li><strong>Bean</strong>: CoffeeBean (wielu-do-jednego)</li>
+                    <li><strong>Roaster</strong>: Roaster (wielu-do-jednego)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Walidacja danych</h2>
+        <table>
+            <tr><th>Model</th><th>Pole</th><th>Wymagania walidacyjne</th></tr>
+            <tr><td>Country</td><td>Name</td><td>Wymagane, max 100 znaków</td></tr>
+            <tr><td>City</td><td>Name</td><td>Wymagane, max 100 znaków</td></tr>
+            <tr><td>CoffeeBean</td><td>Name</td><td>Wymagane, max 100 znaków</td></tr>
+            <tr><td>Roaster</td><td>Name</td><td>Wymagane, max 150 znaków</td></tr>
+            <tr><td>Coffee</td><td>Name</td><td>Wymagane, max 200 znaków</td></tr>
+            <tr><td>Coffee</td><td>RoastLevel</td><td>Wymagane, max 50 znaków</td></tr>
+            <tr><td>Coffee</td><td>Price</td><td>Wymagane, zakres 0.01-1000.00</td></tr>
+        </table>
+    </div>
+
+    <h1>Dokumentacja projektu CoffeeAppMvc5</h1>
+    <p>Ostatnia aktualizacja: <span id="update-date">10 listopada 2023</span></p>
+    
+    <div class="section">
+        <h2>Architektura projektu</h2>
+        <div class="model-diagram">
+            <h3>Diagram relacji między modelami</h3>
+            <pre>
+Country (1) ← (n) City (1) ← (n) Roaster
+   ↑                               ↓
+   └────────── (n) CoffeeBean      (n) Coffee
+            </pre>
+            <p>Kluczowe zależności:</p>
+            <ul>
+                <li>Kraj może mieć wiele miast</li>
+                <li>Miasto może mieć wielu palaczy kawy</li>
+                <li>Kraj może mieć wiele rodzajów ziaren kawy</li>
+                <li>Palarnia może mieć wiele kaw</li>
+                <li>Ziarno kawy może być użyte w wielu kawach</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Lista kontrolerów</h2>
+        <table>
+            <tr>
+                <th>Kontroler</th>
+                <th>Opis</th>
+                <th>Główne encje</th>
+            </tr>
+            <tr>
+                <td>HomeController</td>
+                <td>Główny kontroler aplikacji</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>CitiesController</td>
+                <td>Zarządzanie miastami</td>
+                <td>City, Country</td>
+            </tr>
+            <tr>
+                <td>CoffeeBeansController</td>
+                <td>Zarządzanie ziarnami kawy</td>
+                <td>CoffeeBean, Country</td>
+            </tr>
+            <tr>
+                <td>CoffeesController</td>
+                <td>Zarządzanie kawami</td>
+                <td>Coffee, CoffeeBean, Roaster</td>
+            </tr>
+            <tr>
+                <td>CountriesController</td>
+                <td>Zarządzanie krajami</td>
+                <td>Country</td>
+            </tr>
+            <tr>
+                <td>RoastersController</td>
+                <td>Zarządzanie palarniami kawy</td>
+                <td>Roaster, City</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Szczegółowa dokumentacja kontrolerów</h2>
+
+        <h3>CitiesController</h3>
+        <p>Zarządzanie miastami i ich powiązaniami z krajami</p>
+        <table>
+            <tr><th>Akcja</th><th>Metoda</th><th>Ścieżka</th><th>Opis</th></tr>
+            <tr><td>Index</td><td>GET</td><td>/Cities</td><td>Lista wszystkich miast z krajami</td></tr>
+            <tr><td>Create</td><td>GET</td><td>/Cities/Create</td><td>Formularz tworzenia nowego miasta</td></tr>
+            <tr><td>Create</td><td>POST</td><td>/Cities/Create</td><td>Zapis nowego miasta</td></tr>
+            <tr><td>Edit</td><td>GET</td><td>/Cities/Edit/5</td><td>Formularz edycji miasta</td></tr>
+            <tr><td>Edit</td><td>POST</td><td>/Cities/Edit/5</td><td>Zapis zmian miasta</td></tr>
+            <tr><td>Delete</td><td>GET</td><td>/Cities/Delete/5</td><td>Potwierdzenie usunięcia miasta</td></tr>
+            <tr><td>Delete</td><td>POST</td><td>/Cities/Delete/5</td><td>Usunięcie miasta</td></tr>
+        </table>
+
+        <h3>CoffeeBeansController</h3>
+        <p>Zarządzanie rodzajami ziaren kawy i ich powiązaniami z krajami pochodzenia</p>
+        <table>
+            <tr><th>Akcja</th><th>Metoda</th><th>Ścieżka</th><th>Opis</th></tr>
+            <tr><td>Index</td><td>GET</td><td>/CoffeeBeans</td><td>Lista ziaren kawy z krajami pochodzenia</td></tr>
+            <tr><td>Create</td><td>GET</td><td>/CoffeeBeans/Create</td><td>Formularz tworzenia nowego ziarna</td></tr>
+            <tr><td>Create</td><td>POST</td><td>/CoffeeBeans/Create</td><td>Zapis nowego ziarna</td></tr>
+            <tr><td>Edit</td><td>GET</td><td>/CoffeeBeans/Edit/5</td><td>Formularz edycji ziarna</td></tr>
+            <tr><td>Edit</td><td>POST</td><td>/CoffeeBeans/Edit/5</td><td>Zapis zmian ziarna</td></tr>
+            <tr><td>Delete</td><td>GET</td><td>/CoffeeBeans/Delete/5</td><td>Potwierdzenie usunięcia ziarna</td></tr>
+            <tr><td>Delete</td><td>POST</td><td>/CoffeeBeans/Delete/5</td><td>Usunięcie ziarna</td></tr>
+        </table>
+
+        <h3>CoffeesController</h3>
+        <p>Zarządzanie kawami i ich powiązaniami z ziarnami i palarniami</p>
+        <table>
+            <tr><th>Akcja</th><th>Metoda</th><th>Ścieżka</th><th>Opis</th></tr>
+            <tr><td>Index</td><td>GET</td><td>/Coffees</td><td>Lista kaw z ziarnami i palarniami</td></tr>
+            <tr><td>Create</td><td>GET</td><td>/Coffees/Create</td><td>Formularz tworzenia nowej kawy</td></tr>
+            <tr><td>Create</td><td>POST</td><td>/Coffees/Create</td><td>Zapis nowej kawy</td></tr>
+            <tr><td>Edit</td><td>GET</td><td>/Coffees/Edit/5</td><td>Formularz edycji kawy</td></tr>
+            <tr><td>Edit</td><td>POST</td><td>/Coffees/Edit/5</td><td>Zapis zmian kawy</td></tr>
+            <tr><td>Delete</td><td>GET</td><td>/Coffees/Delete/5</td><td>Potwierdzenie usunięcia kawy</td></tr>
+            <tr><td>Delete</td><td>POST</td><td>/Coffees/Delete/5</td><td>Usunięcie kawy</td></tr>
+        </table>
+
+        <h3>CountriesController</h3>
+        <p>Zarządzanie krajami</p>
+        <table>
+            <tr><th>Akcja</th><th>Metoda</th><th>Ścieżka</th><th>Opis</th></tr>
+            <tr><td>Index</td><td>GET</td><td>/Countries</td><td>Lista krajów</td></tr>
+            <tr><td>Create</td><td>GET</td><td>/Countries/Create</td><td>Formularz tworzenia nowego kraju</td></tr>
+            <tr><td>Create</td><td>POST</td><td>/Countries/Create</td><td>Zapis nowego kraju</td></tr>
+            <tr><td>Edit</td><td>GET</td><td>/Countries/Edit/5</td><td>Formularz edycji kraju</td></tr>
+            <tr><td>Edit</td><td>POST</td><td>/Countries/Edit/5</td><td>Zapis zmian kraju</td></tr>
+            <tr><td>Delete</td><td>GET</td><td>/Countries/Delete/5</td><td>Potwierdzenie usunięcia kraju</td></tr>
+            <tr><td>Delete</td><td>POST</td><td>/Countries/Delete/5</td><td>Usunięcie kraju</td></tr>
+        </table>
+
+        <h3>RoastersController</h3>
+        <p>Zarządzanie palarniami kawy i ich powiązaniami z miastami</p>
+        <table>
+            <tr><th>Akcja</th><th>Metoda</th><th>Ścieżka</th><th>Opis</th></tr>
+            <tr><td>Index</td><td>GET</td><td>/Roasters</td><td>Lista palarni z miastami</td></tr>
+            <tr><td>Create</td><td>GET</td><td>/Roasters/Create</td><td>Formularz tworzenia nowej palarni</td></tr>
+            <tr><td>Create</td><td>POST</td><td>/Roasters/Create</td><td>Zapis nowej palarni</td></tr>
+            <tr><td>Edit</td><td>GET</td><td>/Roasters/Edit/5</td><td>Formularz edycji palarni</td></tr>
+            <tr><td>Edit</td><td>POST</td><td>/Roasters/Edit/5</td><td>Zapis zmian palarni</td></tr>
+            <tr><td>Delete</td><td>GET</td><td>/Roasters/Delete/5</td><td>Potwierdzenie usunięcia palarni</td></tr>
+            <tr><td>Delete</td><td>POST</td><td>/Roasters/Delete/5</td><td>Usunięcie palarni</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Mapa routingu</h2>
+        <table>
+            <tr><th>Ścieżka</th><th>Kontroler</th><th>Akcja</th><th>Metoda</th></tr>
+            <tr><td>/</td><td>Home</td><td>Index</td><td>GET</td></tr>
+            <tr><td>/Home/Dashboard</td><td>Home</td><td>Dashboard</td><td>GET</td></tr>
+            <tr><td>/Cities</td><td>Cities</td><td>Index</td><td>GET</td></tr>
+            <tr><td>/Cities/Create</td><td>Cities</td><td>Create</td><td>GET/POST</td></tr>
+            <tr><td>/Cities/Edit/5</td><td>Cities</td><td>Edit</td><td>GET/POST</td></tr>
+            <tr><td>/Cities/Delete/5</td><td>Cities</td><td>Delete</td><td>GET/POST</td></tr>
+            <tr><td>/CoffeeBeans</td><td>CoffeeBeans</td><td>Index</td><td>GET</td></tr>
+            <tr><td>/CoffeeBeans/Create</td><td>CoffeeBeans</td><td>Create</td><td>GET/POST</td></tr>
+            <tr><td>/CoffeeBeans/Edit/5</td><td>CoffeeBeans</td><td>Edit</td><td>GET/POST</td></tr>
+            <tr><td>/CoffeeBeans/Delete/5</td><td>CoffeeBeans</td><td>Delete</td><td>GET/POST</td></tr>
+            <tr><td>/Coffees</td><td>Coffees</td><td>Index</td><td>GET</td></tr>
+            <tr><td>/Coffees/Create</td><td>Coffees</td><td>Create</td><td>GET/POST</td></tr>
+            <tr><td>/Coffees/Edit/5</td><td>Coffees</td><td>Edit</td><td>GET/POST</td></tr>
+            <tr><td>/Coffees/Delete/5</td><td>Coffees</td><td>Delete</td><td>GET/POST</td></tr>
+            <tr><td>/Countries</td><td>Countries</td><td>Index</td><td>GET</td></tr>
+            <tr><td>/Countries/Create</td><td>Countries</td><td>Create</td><td>GET/POST</td></tr>
+            <tr><td>/Countries/Edit/5</td><td>Countries</td><td>Edit</td><td>GET/POST</td></tr>
+            <tr><td>/Countries/Delete/5</td><td>Countries</td><td>Delete</td><td>GET/POST</td></tr>
+            <tr><td>/Roasters</td><td>Roasters</td><td>Index</td><td>GET</td></tr>
+            <tr><td>/Roasters/Create</td><td>Roasters</td><td>Create</td><td>GET/POST</td></tr>
+            <tr><td>/Roasters/Edit/5</td><td>Roasters</td><td>Edit</td><td>GET/POST</td></tr>
+            <tr><td>/Roasters/Delete/5</td><td>Roasters</td><td>Delete</td><td>GET/POST</td></tr>
+        </table>
+    </div>
+
+    <h1>Dokumentacja widoków CoffeeAppMvc5</h1>
+    <p>Ostatnia aktualizacja: <span id="update-date">10 listopada 2023</span></p>
+
+    <div class="section">
+        <h2>Layouty i struktura widoków</h2>
+        
+        <div class="view-box">
+            <h3>_Layout.cshtml</h3>
+            <p>Główny layout aplikacji z nawigacją Bootstrap</p>
+            <div class="layout-features">
+                <strong>Funkcje:</strong>
+                <ul>
+                    <li>Responsywna nawigacja z linkami do wszystkich kontrolerów</li>
+                    <li>Standardowy układ z nagłówkiem, treścią i stopką</li>
+                    <li>Integracja z Bootstrap i Modernizr</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="view-box">
+            <h3>_Layout1.cshtml</h3>
+            <p>Alternatywny layout z niestandardowym designem</p>
+            <div class="layout-features">
+                <strong>Funkcje:</strong>
+                <ul>
+                    <li>Niestandardowa kolorystyka (róż, brąz, beż)</li>
+                    <li>Logo i nazwa kawiarni w nagłówku</li>
+                    <li>Poziomy pasek nawigacyjny z linkami do wszystkich kontrolerów</li>
+                    <li>Responsywny design z media queries</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="view-box">
+            <h3>_IndexLayout.cshtml</h3>
+            <p>Layout z bocznym menu nawigacyjnym</p>
+            <div class="layout-features">
+                <strong>Funkcje:</strong>
+                <ul>
+                    <li>Boczne menu z linkami do wszystkich kontrolerów</li>
+                    <li>Efekty hover na elementach menu</li>
+                    <li>Oznaczanie aktywnego kontrolera</li>
+                    <li>Responsywny design - menu przechodzi w wersję poziomą na małych ekranach</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Widoki kontrolerów</h2>
+        <p>Wszystkie kontrolery mają pełną implementację operacji CRUD w swoich widokach:</p>
+        
+        <table>
+            <tr>
+                <th>Kontroler</th>
+                <th>Widoki CRUD</th>
+                <th>Dodatkowe widoki</th>
+            </tr>
+            <tr>
+                <td>Countries</td>
+                <td>Index, Details, Create, Edit, Delete</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Cities</td>
+                <td>Index, Details, Create, Edit, Delete</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>CoffeeBeans</td>
+                <td>Index, Details, Create, Edit, Delete</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Roasters</td>
+                <td>Index, Details, Create, Edit, Delete</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Coffees</td>
+                <td>Index, Details, Create, Edit, Delete</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Home</td>
+                <td>-</td>
+                <td>Index, Dashboard, About, Contact</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Szczegóły widoków</h2>
+
+        <div class="view-box">
+            <h3>Index.cshtml (Home)</h3>
+            <p>Strona startowa z logo aplikacji</p>
+            <p><span class="crud-badge">SPECJALNY</span> <span class="crud-badge">LAYOUT: NONE</span></p>
+            <ul>
+                <li>Prosta strona z logo i przyciskiem do przejścia do Dashboard</li>
+                <li>Animacja powiększenia przy najechaniu na logo</li>
+                <li>Wyłączony główny layout (<code>Layout = null</code>)</li>
+            </ul>
+        </div>
+
+        <div class="view-box">
+            <h3>Dashboard.cshtml (Home)</h3>
+            <p>Panel zarządzania aplikacją</p>
+            <p><span class="crud-badge">INFORMACYJNY</span></p>
+            <ul>
+                <li>Używa layoutu <code>_Layout1.cshtml</code></li>
+                <li>Zawiera podstawowe informacje o aplikacji</li>
+                <li>Przygotowany w formie "jumbotron" z sekcjami informacyjnymi</li>
+            </ul>
+        </div>
+
+        <div class="view-box">
+            <h3>About.cshtml (Home)</h3>
+            <p>Strona informacyjna o aplikacji</p>
+            <p><span class="crud-badge">INFORMACYJNY</span></p>
+            <ul>
+                <li>Standardowy widok z możliwością rozbudowy</li>
+                <li>Wyświetla komunikat z <code>ViewBag.Message</code></li>
+            </ul>
+        </div>
+
+        <div class="view-box">
+            <h3>Contact.cshtml (Home)</h3>
+            <p>Strona kontaktowa</p>
+            <p><span class="crud-badge">INFORMACYJNY</span></p>
+            <ul>
+                <li>Przykładowe dane kontaktowe</li>
+                <li>Linki mailowe do działów supportu i marketingu</li>
+            </ul>
+        </div>
+
+        <div class="view-box">
+            <h3>Error.cshtml</h3>
+            <p>Strona błędu</p>
+            <p><span class="crud-badge">SYSTEMOWY</span></p>
+            <ul>
+                <li>Prosty widok wyświetlany w przypadku błędów</li>
+                <li>Brak layoutu, minimalne style</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Pełna implementacja CRUD</h2>
+        <p>Wszystkie klasy modeli mają pełną implementację operacji CRUD w swoich widokach:</p>
+        
+        <h3>Standardowe operacje CRUD w widokach:</h3>
+        <ul>
+            <li><strong>Index</strong> - lista wszystkich rekordów z możliwością sortowania i filtrowania</li>
+            <li><strong>Details</strong> - szczegółowy widok pojedynczego rekordu</li>
+            <li><strong>Create</strong> - formularz dodawania nowego rekordu</li>
+            <li><strong>Edit</strong> - formularz edycji istniejącego rekordu</li>
+            <li><strong>Delete</strong> - potwierdzenie usunięcia rekordu</li>
+        </ul>
+
+        <h3>Dodatkowe funkcje widoków CRUD:</h3>
+        <ul>
+            <li>Automatyczne ładowanie powiązanych danych (np. lista krajów przy wyborze pochodzenia ziaren)</li>
+            <li>Walidacja pól formularzy zgodna z atrybutami w modelach</li>
+            <li>Spójna stylizacja we wszystkich widokach</li>
+            <li>Przyciski akcji w widoku Index prowadzące do odpowiednich operacji</li>
+        </ul>
+    </div>
+</body>
+</html>
