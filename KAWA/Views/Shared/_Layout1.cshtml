@@ -18,13 +18,13 @@
         html, body {
             margin: 0;
             padding: 0;
-            min-height: 100%; /* Zmieniono na min-height, aby treść mogła rosnąć */
+            min-height: 100%; 
             overflow-x: hidden;
             background-color: #FFFCF5;
             font-family: 'Lexend Deca', sans-serif;
             color: #000000;
-            display: flex; /* Dodano flexbox do body */
-            flex-direction: column; /* Ułożenie elementów w kolumnę */
+            display: flex; 
+            flex-direction: column; 
         }
 
         header {
@@ -76,13 +76,13 @@
             }
 
         .top-navbar {
-            background-color: #A67C58; /* Brązowy kolor paska */
+            background-color: #A67C58; 
             padding: 0.5rem 1rem;
             display: flex;
-            justify-content: center; /* Wyśrodkowanie linków */
-            flex-wrap: wrap; /* Zawijanie linków na mniejszych ekranach */
-            gap: 15px; /* Odstępy między linkami */
-            border-bottom: 2px solid #FAB7CF; /* Granica dolna */
+            justify-content: center; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+            border-bottom: 2px solid #FAB7CF; 
         }
 
             .top-navbar .nav-link {
@@ -90,13 +90,13 @@
                 text-decoration: none;
                 padding: 0.5rem 1rem;
                 transition: all 0.3s ease;
-                border-radius: 10px; /* Zaokrąglone rogi dla aktywnych/hover */
+                border-radius: 10px; 
             }
 
                 .top-navbar .nav-link:hover {
                     background-color: #FAB7CF;
                     color: #000;
-                    transform: translateY(-2px); /* Lekkie podniesienie na hover */
+                    transform: translateY(-2px); 
                 }
 
                 .top-navbar .nav-link.active {
@@ -106,7 +106,7 @@
                 }
 
         .content-area {
-            flex: 1; /* Pozwala obszarowi treści zająć dostępną przestrzeń */
+            flex: 1; 
             padding: 20px;
             overflow-y: auto;
             background-color: #FFFCF5;
@@ -220,12 +220,12 @@
             }
 
             .top-navbar {
-                flex-direction: column; /* Ułożenie linków w kolumnę na małych ekranach */
-                align-items: center; /* Wyśrodkowanie w kolumnie */
+                flex-direction: column; 
+                align-items: center; 
             }
 
                 .top-navbar .nav-link {
-                    width: 90%; /* Linki zajmują więcej miejsca */
+                    width: 90%; 
                     text-align: center;
                 }
 
